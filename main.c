@@ -1,10 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+void menu()
+{
+
+    printf("---Menu---\n\n");
+    printf("Selecione uma das opcoes abaixo: \n");
+    printf("1) Ler o dataset do TripAdivisor\n");
+    printf("2) Gerar Vocabulario\n");
+    printf("3) Exibir TF-IDF\n");
+    printf("4) Exibir TF-IDF por Nota\n");
+    printf("5) Sair\n");
+}
 
 int main()
 {
     int opt = 0; // Variavel que armazena a opcao do menu
     char stp;    // Variavel que so serve para parar o programa ate que o usuario insira qualquer char
+
+    float *tf_idf_1, *tf_idf_2, *tf_idf_3, *tf_idf_4, *tf_idf_5; // Vetores para armazenar os if_idf das notas 1-5
 
     while (opt != 5)
     {
@@ -44,16 +59,4 @@ int main()
     }
 
     return 0;
-}
-
-void menu()
-{
-
-    printf("---Menu---\n\n");
-    printf("Selecione uma das opcoes abaixo: \n");
-    printf("1) Ler o dataset do TripAdivisor\n");
-    printf("2) Gerar Vocabulario\n");
-    printf("3) Exibir TF-IDF\n");
-    printf("4) Exibir TF-IDF por Nota\n");
-    printf("5) Sair\n");
 }
