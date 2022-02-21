@@ -47,34 +47,20 @@
   return 0;
 }*/
 
-int main(int argc, char *argv[])
-{   
-    // abre arquivo
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(){
+    char *pt;
     FILE* fp = fopen("tripadvisor_hotel_reviews.csv", "r");
-    if (fp == NULL) 
-    {
-        printf("Falha ao abrir o arquivo");
-        return(1);
+
+    pt = strtok(fp, "\n");
+    while(pt){
+        printf("review: %s\n", pt);
+        pt = strtok(NULL, "!. ");
     }
+    
 
-    // separa linhas
-    char linha[MAX_LINHA];
-    char *campo;
-    while (fgets(linha, MAX_LINHA, fp) != EOF) 
-    {
-        printf("Linha: %s", linha);
-
-        // separa tokens
-        printf("Campos:\n");
-        campo = strtok(linha,"\n");
-        while( campo != NULL ) 
-        {
-            printf( "--> %s\n", campo);
-            campo = strtok(NULL, "\n");
-        }
-    }
-
-    fclose(fp);
-    return(0);
+    return 0;
 }
-
