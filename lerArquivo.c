@@ -47,7 +47,7 @@
   return 0;
 }*/
 
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -63,4 +63,28 @@ int main(){
     
 
     return 0;
+}*/
+
+int main()
+{
+  char *sub;
+  char texto[1024];
+  char ch;
+
+  FILE* fp = fopen("arquivo.txt", "r");
+
+  fgets(texto,1024, fp);
+
+
+  sub = strtok(texto,"%d\n");
+
+  while (sub != NULL)
+  {
+    printf("%s\n", sub);
+
+    sub = strtok(NULL,"%d\n");
+  }
+  
+  printf("\nFIM\n");
+  return 0;
 }

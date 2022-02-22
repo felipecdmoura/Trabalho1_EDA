@@ -7,7 +7,7 @@ int main()
 {
     // Substitute the full file path
     // for the string file_path
-    FILE* fp = fopen("tripadvisor_hotel_reviews.csv", "r");
+    FILE* fp = fopen("arquivo.txt", "r");
   
     if (!fp)
         printf("Can't open file\n");
@@ -15,13 +15,12 @@ int main()
     else {
         // Here we have taken size of
         // array 1024 you can modify it
-        char buffer[20000];
+        char buffer[1024];
   
         int row = 0;
         int column = 0;
   
-        while (fgets(buffer,
-                     20000, fp)) {
+        while (fgets(buffer,1024, fp)) {
             column = 0;
             row++;
   
@@ -32,26 +31,21 @@ int main()
                 continue;
   
             // Splitting the data
-            char* value = strtok(buffer, "\n");
+            char* value = strtok(buffer, "%d\n");
   
             while (value) {
                 // Column 1
                 if (column == 0) {
-                    printf("Name :");
+                    printf("Rating:");
                 }
   
                 // Column 2
                 if (column == 1) {
-                    printf("\tAccount No. :");
-                }
-  
-                // Column 3
-                if (column == 2) {
-                    printf("\tAmount :");
+                    printf("Review:");
                 }
   
                 printf("%s", value);
-                value = strtok(NULL, ", ");
+                value = strtok(NULL, "%d\n");
                 column++;
             }
   
