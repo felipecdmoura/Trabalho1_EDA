@@ -2,89 +2,26 @@
 #include <stdlib.h>
 #define MAX_LINHA 21000
 
-/*int main(void)
-{
- char url[]="tripadvisor_hotel_reviews.csv",//passando o arquivo para o vetor char
-      ch;
- int num=0;
- FILE *arq;
-  
- arq = fopen(url, "r"); //lendo o arquivo//
- if(arq == NULL){
-   printf("Erro, nao foi possivel abrir o arquivo\n");
- }
+void separaArquivo(){
 
- else{
-  for(num =0; (ch=fgetc(arq)) != EOF; num++ ){
-  
-  }
- //printf("Existem %d linhas no arquivo\n", num);
- fclose(arq);
- 
- return 0;
-}*/
+  FILE *arq = fopen("tripadvisor_hotel_reviews.csv", "r");
+  FILE *novoarq = fopen("arquivo.txt", "w");
 
-/*int main(int argc, char const *argv[])
-{
-  //char url[] = "tripadvisor_hotel_reviews.csv";
-  FILE *arq;
-  char *sub;
+  char linha[2000];
 
-  arq = fopen("tripadvisor_hotel_reviews.csv", "r");
-
-  sub = strtok(arq, "\n");
-
-  while(sub != NULL){
-    printf("%c", sub);
-
-
-  }
-
-  fclose(arq);
-
-
-
-  return 0;
-}*/
-
-/*#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-int main(){
-    char *pt;
-    FILE* fp = fopen("tripadvisor_hotel_reviews.csv", "r");
-
-    pt = strtok(fp, "\n");
-    while(pt){
-        printf("review: %s\n", pt);
-        pt = strtok(NULL, "!. ");
-    }
-    
-
-    return 0;
-}*/
-
-int main()
-{
-  char *sub;
-  char texto[1024];
-  char ch;
-
-  FILE* fp = fopen("arquivo.txt", "r");
-
-  fgets(texto,1024, fp);
-
-
-  sub = strtok(texto,"%d\n");
-
-  while (sub != NULL)
+  while (fgets(linha, sizeof(linha), arq))
   {
-    printf("%s\n", sub);
+     char *token;
 
-    sub = strtok(NULL,"%d\n");
+     token = strtok(linha, ",");
+
+     while (token != NULL)
+     {
+       printf("%s", token);
+       //fputs(token, novoarq);
+       token = strtok(NULL, ",");
+     }
+    printf("\n"); 
   }
-  
-  printf("\nFIM\n");
-  return 0;
+
 }

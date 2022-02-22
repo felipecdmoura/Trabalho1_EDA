@@ -20,7 +20,7 @@ int main()
     char stp;    // Variavel que so serve para parar o programa ate que o usuario insira qualquer char
 
     float *tf_idf_1, *tf_idf_2, *tf_idf_3, *tf_idf_4, *tf_idf_5; // Vetores para armazenar os if_idf das notas 1-5
-
+    
     while (opt != 5)
     {
         system("cls || clear");
