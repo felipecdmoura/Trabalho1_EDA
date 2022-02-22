@@ -1,16 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define MAX_LINHA 21000
 
-void separaArquivo(){
-
+void separarArquivo(){ 
+  //abrindo arquivo csv
   FILE *arq = fopen("tripadvisor_hotel_reviews.csv", "r");
+
+  //abrindo arquivo que recebera o csv em text
   FILE *novoarq = fopen("arquivo.txt", "w");
 
-  char linha[2000];
+  //abrindo arquivo que receberá avaliações Nota1
+  FILE *notaum = fopen("Nota1.txt", "w");
 
-  while (fgets(linha, sizeof(linha), arq))
-  {
+  //declarando vetor que receberá cada linha do csv
+  char linha[2000];
+  char linha2[2000];
+
+  while (fgets(linha, sizeof(linha), arq)){
      char *token;
 
      token = strtok(linha, ",");
@@ -18,7 +25,7 @@ void separaArquivo(){
      while (token != NULL)
      {
        printf("%s", token);
-       //fputs(token, novoarq);
+       fputs(token, novoarq);
        token = strtok(NULL, ",");
      }
     printf("\n"); 
