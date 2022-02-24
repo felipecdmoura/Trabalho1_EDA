@@ -2,81 +2,56 @@
 #include <stdlib.h>
 #include <string.h>
 #define MAX_LINHA 21000
-char parse(char* string, char* mensagem);
 
-int main(){ 
-  FILE *arq = fopen("arquivo.txt", "r");
+void separaArquivo(FILE *arq)
+{
+
+  // Abre/Cria 5 documentos para separar as reviews por nota
   FILE *n1 = fopen("Nota1.txt", "w");
   FILE *n2 = fopen("Nota2.txt", "w");
   FILE *n3 = fopen("Nota3.txt", "w");
   FILE *n4 = fopen("Nota4.txt", "w");
   FILE *n5 = fopen("Nota5.txt", "w");
 
+  char linha[MAX_LINHA]; // Variavel de grande tamanho, que recebera cada linha do csv.
+  char notaNum;          // Variavel que recebera a nota de cada review.
 
-  //declarando vetor que receberá cada linha do csv
-  char option;
-  char mensagem[MAX_LINHA]; 
-  char linha;
-  linha = (char*) malloc(10 * sizeof(char)); 
-  int count = 0;
-  
-  
-  do{
-    fscanf(arq, "%[^\n] ", linha);
-    fgets(linha, sizeof(linha), arq);
-    option = parse(linha, mensagem);
-    printf("%c %s\n", option, mensagem);
-    
-    switch(option){
-        case '1':
-            fputs(mensagem, n1);
-            fputs("\n", n1);
-            break;
-        case '2':
-            fputs(mensagem, n2);
-            fputs("\n", n2);
-            break;
-        case '3':
-            fputs(mensagem, n3);
-            fputs("\n", n3);
-            break;
-        case '4':
-            fputs(mensagem, n4);
-            fputs("\n", n4);
-            break;
-        case '5':
-            fputs(mensagem, n5);
-            fputs("\n", n5);
-            break;
+  while (fgets(linha, sizeof(linha), arq))
+  {
+    notaNum = linha[strlen(linha) - 2]; // Como o antepenultimo caracter de uma linha se refere sempre a nota da review, aloca esse caractere em notaNum.
+
+    // Desigina a linha lida para cada arquivo, separando o csv por nota, baseado na nota lida na mesma linha.
+    switch (notaNum)
+    {
+    case '1':
+      fputs(linha, n1);
+      break;
+
+    case '2':
+      fputs(linha, n2);
+      break;
+
+    case '3':
+      fputs(linha, n3);
+      break;
+
+    case '4':
+      fputs(linha, n4);
+      break;
+
+    case '5':
+      fputs(linha, n5);
+      break;
+
+    default:
+      break;
     }
-  }while(!feof(arq));
-  
+  }
+
   free(linha);
-  fclose(arq);
   fclose(n1);
   fclose(n2);
   fclose(n3);
   fclose(n4);
   fclose(n5);
-
-  
-
-  return 0;
-}
-
-char parse(char* string, char *mensagem){
-  int posicao = 0;
-  mensagem[posicao] = string[posicao];
-  posicao++;
-  while (string[posicao] != '"')
-  {
-    mensagem[posicao] = string[posicao];
-    posicao++;
-  }
-  mensagem[posicao] = string[posicao];
-  posicao++;
-  mensagem[posicao] = '\0';
-  posicao++;
-  
-  return string[posicao];
 }

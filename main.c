@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "separarArquivo.c"
 // Struct para o vetor de string do vocabulario; possui o vetor em si,  e o tamanho dele, para uso de loops.
 typedef struct
 {
@@ -25,10 +25,17 @@ int main()
 {
     Vocabulary voc; // Variavel do vetor de strings que recebera o vocabulario.
 
-    int opt = 0; // Variavel que armazena a opcao do menu
-    char stp;    // Variavel que so serve para parar o programa ate que o usuario insira qualquer char
+    FILE *arqCsv = fopen("tripadvisor_hotel_reviews.csv", "r");
 
+    int opt = 0;                                                 // Variavel que armazena a opcao do menu
+    char stp;                                                    // Variavel que so serve para parar o programa ate que o usuario insira qualquer char
     float *tf_idf_1, *tf_idf_2, *tf_idf_3, *tf_idf_4, *tf_idf_5; // Vetores para armazenar os if_idf das notas 1-5
+
+    if (arqCsv == NULL)
+    {
+        printf("Erro ao abrir o arquivo csv!");
+        exit(0);
+    }
 
     while (opt != 5)
     {
@@ -40,6 +47,10 @@ int main()
         switch (opt)
         {
         case 1:
+            system("cls || clear");
+            separaArquivo(arqCsv);
+            printf("Arquivo separado por notas com sucesso! (Digite qualquer coisa para continuar)");
+            scanf(" %c", &stp);
 
             break;
 
@@ -60,9 +71,9 @@ int main()
             break;
 
         default:
-            printf("Opcao invalida! Digite qualquer coisa para voltar:\n");
-            scanf(" %c", &stp);
-            break;
+            printf("Opcao invalida! (Digite qualquer coisa para continuar)\n");
+            while (getchar() != '\n')
+                break;
         }
         /* code */
     }
