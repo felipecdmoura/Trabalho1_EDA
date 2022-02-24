@@ -2,6 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Struct para o vetor de string do vocabulario; possui o vetor em si,  e o tamanho dele, para uso de loops.
+typedef struct
+{
+    char **words;
+    int size;
+} Vocabulary;
+
 void menu()
 {
 
@@ -16,11 +23,13 @@ void menu()
 
 int main()
 {
+    Vocabulary voc; // Variavel do vetor de strings que recebera o vocabulario.
+
     int opt = 0; // Variavel que armazena a opcao do menu
     char stp;    // Variavel que so serve para parar o programa ate que o usuario insira qualquer char
 
     float *tf_idf_1, *tf_idf_2, *tf_idf_3, *tf_idf_4, *tf_idf_5; // Vetores para armazenar os if_idf das notas 1-5
-    
+
     while (opt != 5)
     {
         system("cls || clear");
