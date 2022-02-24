@@ -5,7 +5,6 @@
 char parse(char* string, char* mensagem);
 
 int main(){ 
-  //abrindo arquivo csv
   FILE *arq = fopen("arquivo2.txt", "r");
   FILE *n1 = fopen("Nota1.txt", "w");
   FILE *n2 = fopen("Nota2.txt", "w");
