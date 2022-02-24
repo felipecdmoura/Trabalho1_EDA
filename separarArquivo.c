@@ -5,8 +5,7 @@
 char parse(char* string, char* mensagem);
 
 int main(){ 
-  //abrindo arquivo csv
-  FILE *arq = fopen("arquivo.txt", "rw");
+  FILE *arq = fopen("arquivo.txt", "r");
   FILE *n1 = fopen("Nota1.txt", "w");
   FILE *n2 = fopen("Nota2.txt", "w");
   FILE *n3 = fopen("Nota3.txt", "w");
@@ -16,12 +15,18 @@ int main(){
 
   //declarando vetor que receberá cada linha do csv
   char option;
-  char mensagem[MAX_LINHA]; 
-  char linha[MAX_LINHA];
+  printf("Ponto de parada\n");
+  char mensagem[10000]; 
+  printf("Ponto de parada\n");
+  char linha[10000];
+  printf("Ponto de parada\n");
   int count = 0;
+  printf("Ponto de parada\n");
   
   do{
-    fscanf(arq, "%[^\n]\n", linha);
+    printf("Ponto de parada");
+    fscanf(arq, "%[^\n] ", linha);
+    //fgets(linha, sizeof(linha), arq);
     option = parse(linha, mensagem);
     printf("%c %s\n", option, mensagem);
     
@@ -47,7 +52,7 @@ int main(){
             fputs("\n", n5);
             break;
     }
-  }while(!feof(arq));
+  }while(/*!feof(arq)*/ arq != EOF);
   
   
   fclose(arq);
