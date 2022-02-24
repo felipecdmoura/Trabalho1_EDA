@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <gerarVoc.c>
 
 // Struct para o vetor de string do vocabulario; possui o vetor em si,  e o tamanho dele, para uso de loops.
 typedef struct
@@ -44,7 +45,7 @@ int main()
             break;
 
         case 2:
-
+            
             break;
 
         case 3:
