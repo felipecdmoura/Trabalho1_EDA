@@ -15,18 +15,15 @@ int main(){
 
   //declarando vetor que receberá cada linha do csv
   char option;
-  printf("Ponto de parada\n");
-  char mensagem[10000]; 
-  printf("Ponto de parada\n");
-  char linha[10000];
-  printf("Ponto de parada\n");
+  char mensagem[MAX_LINHA]; 
+  char linha;
+  linha = (char*) malloc(10 * sizeof(char)); 
   int count = 0;
-  printf("Ponto de parada\n");
+  
   
   do{
-    printf("Ponto de parada");
     fscanf(arq, "%[^\n] ", linha);
-    //fgets(linha, sizeof(linha), arq);
+    fgets(linha, sizeof(linha), arq);
     option = parse(linha, mensagem);
     printf("%c %s\n", option, mensagem);
     
@@ -52,15 +49,16 @@ int main(){
             fputs("\n", n5);
             break;
     }
-  }while(/*!feof(arq)*/ arq != EOF);
+  }while(!feof(arq));
   
-  
+  free(linha);
   fclose(arq);
   fclose(n1);
   fclose(n2);
   fclose(n3);
   fclose(n4);
   fclose(n5);
+
   
 
   return 0;
