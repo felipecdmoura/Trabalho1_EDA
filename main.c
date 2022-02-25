@@ -1,14 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "VocStruct.h"
 #include "separarArquivo.c"
->>>>>>> 937fc31ad893a6690850bf99fae9475c102cbff0
+#include "gerarVoc.c"
+//#include "calc_TF_IDF.c"
 // Struct para o vetor de string do vocabulario; possui o vetor em si,  e o tamanho dele, para uso de loops.
-typedef struct
-{
-    char **words;
-    int size;
-} Vocabulary;
 
 void menu()
 {
@@ -27,6 +24,11 @@ int main()
     Vocabulary voc; // Variavel do vetor de strings que recebera o vocabulario.
 
     FILE *arqCsv = fopen("tripadvisor_hotel_reviews.csv", "r");
+    FILE *n1;
+    FILE *n2;
+    FILE *n3;
+    FILE *n4;
+    FILE *n5;
 
     int opt = 0;                                                 // Variavel que armazena a opcao do menu
     char stp;                                                    // Variavel que so serve para parar o programa ate que o usuario insira qualquer char
@@ -56,7 +58,20 @@ int main()
             break;
 
         case 2:
-            
+            n1 = fopen("Nota1.txt", "r");
+            n2 = fopen("Nota2.txt", "r");
+            n3 = fopen("Nota3.txt", "r");
+            n4 = fopen("Nota4.txt", "r");
+            n5 = fopen("Nota5.txt", "r");
+
+            voc = genVoc(voc, n1, n2, n3, n4, n5);
+
+            fclose(n1);
+            fclose(n2);
+            fclose(n3);
+            fclose(n4);
+            fclose(n5);
+            printf("%s", voc.words[0]);
             break;
 
         case 3:
