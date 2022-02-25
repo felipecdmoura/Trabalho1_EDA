@@ -1,14 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "calc_TF_IDF.c"
-
+#include "gerarVoc.h"
+#include "calcTF_IDF.c"
+#include "VocStruct.h"
 // Struct para o vetor de string do vocabulario; possui o vetor em si,  e o tamanho dele, para uso de loops e afins.
-typedef struct
-{
-    char **words;
-    int size;
-} Vocabulary;
 
 // Funcao para remover a pontuacao de um texto
 void removePunct(FILE *arq, FILE *temp)
@@ -42,7 +38,7 @@ void removePunct(FILE *arq, FILE *temp)
 // Funcao que copia apenas palavras com mais de 3 letras, de um documento para o outro.
 void rmvSmallWords(FILE *temp1, FILE *temp2)
 {
-    char str[20];
+    char str[100];
     while (!feof(temp1))
     {
         fscanf(temp1, "%s", str);
@@ -59,8 +55,7 @@ void rmvSmallWords(FILE *temp1, FILE *temp2)
 Vocabulary genVoc(Vocabulary voc, FILE *arq1, FILE *arq2, FILE *arq3, FILE *arq4, FILE *arq5)
 {
 
-    char str[20];
-    char *strPnt;
+    char str[100];
     int ver, tempSize;
     int count = 0;
     voc.size = 0;
@@ -72,14 +67,14 @@ Vocabulary genVoc(Vocabulary voc, FILE *arq1, FILE *arq2, FILE *arq3, FILE *arq4
     if (temp1 == NULL)
     {
         printf("Arquivo nao aberto corretamente!");
-        // return voc;
+        return voc;
     }
 
     // Verifica se temp1 abriu corretamente.
     if (temp2 == NULL)
     {
         printf("Arquivo nao aberto corretamente!");
-        // return voc;
+        return voc;
     }
 
     // Remocao da pontuacao dos 5 documentos, ao mesmo tempo em que copia para o temp1.
@@ -102,7 +97,7 @@ Vocabulary genVoc(Vocabulary voc, FILE *arq1, FILE *arq2, FILE *arq3, FILE *arq4
     temp2 = fopen("arqTemp2.txt", "r"); // Fecha e abre o temp2 em forma de leitura.
 
     tempSize = count_DocWords(temp2); // Conta a quantidade de palavras de temp2.
-
+    printf("%d", tempSize);
     voc.words = (char **)malloc(sizeof(char *) * tempSize); // Aloca a quantidade de palavras a serem armazenadas em voc.words, baseado na quantidades de palavras do temp2.
     voc.words[0] = malloc(sizeof(char) * 20);               // Aloca a primeira string vo vetor de strings, para evitar erro no primeiro loop de busca de palavras iguais, que ocorre abaixo.
     rewind(temp2);                                          // Reseta o vetor de temp2 para o comeco do arquivo, para evitar problemas.
@@ -149,5 +144,6 @@ Vocabulary genVoc(Vocabulary voc, FILE *arq1, FILE *arq2, FILE *arq3, FILE *arq4
 
     fclose(temp1);
     fclose(temp2);
+    printf("%s", voc.words[0]);
     return voc;
 }

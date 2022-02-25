@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "separarArquivo.h"
+
 #define MAX_LINHA 21000
 
 void separaArquivo(FILE *arq)
